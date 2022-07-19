@@ -7,7 +7,7 @@ part 'transaction_details.g.dart';
 /// Details of a transaction
 @JsonSerializable(createToJson: false)
 class TransactionDetails {
-  const TransactionDetails({
+  TransactionDetails({
     required this.slot,
     required this.transaction,
     this.blockTime,
@@ -15,7 +15,10 @@ class TransactionDetails {
   });
 
   factory TransactionDetails.fromJson(Map<String, dynamic> json) =>
-      _$TransactionDetailsFromJson(json);
+      _$TransactionDetailsFromJson(json)..rawJson = json;
+
+  @JsonKey(ignore: true)
+  late Map<String, dynamic> rawJson;
 
   /// The slot this transaction was processed in
   final int slot;
